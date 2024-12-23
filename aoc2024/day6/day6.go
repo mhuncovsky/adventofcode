@@ -42,7 +42,7 @@ func (v VecRC) rot90() VecRC {
 type Predictor struct {
 	tiles          [][]byte
 	visited        []VecRC
-	visitedWithDir [][2]VecRC
+	visitedWithDir map[[2]VecRC]struct{}
 	startPos       VecRC
 	pos            VecRC
 	dir            VecRC
@@ -53,7 +53,7 @@ type Predictor struct {
 func NewPredictor(lines []string) *Predictor {
 	tiles := make([][]byte, 0)
 	visited := make([]VecRC, 0)
-	visitedWithDir := make([][2]VecRC, 0)
+	visitedWithDir := make(map[[2]VecRC]struct{}, 0)
 	pos := NewVecRC(0, 0)
 	dir := Up
 	for r, line := range lines {
@@ -76,7 +76,7 @@ func NewPredictor(lines []string) *Predictor {
 		}
 	}
 	visited = append(visited, pos)
-	visitedWithDir = append(visitedWithDir, [2]VecRC{pos, dir})
+	visitedWithDir[[2]VecRC{pos, dir}] = struct{}{}
 	return &Predictor{
 		tiles:          tiles,
 		visited:        visited,
@@ -136,7 +136,7 @@ func (p *Predictor) step() {
 			p.pos = newPos
 			p.updateDir()
 			p.visited = append(p.visited, newPos)
-			p.visitedWithDir = append(p.visitedWithDir, [2]VecRC{newPos, p.dir})
+			p.visitedWithDir[[2]VecRC{newPos, p.dir}] = struct{}{}
 		}
 	}
 }
@@ -175,8 +175,10 @@ func input(prompt string) string {
 func (p *Predictor) isLoop() bool {
 	for !p.finished {
 		p.step()
-		pd := [2]VecRC{p.pos, p.dir}
-		if slices.Contains(p.visitedWithDir[:len(p.visitedWithDir)-1], pd) {
+
+		newPos := p.pos.add(p.dir)
+		pd := [2]VecRC{newPos, p.dir}
+		if _, visited := p.visitedWithDir[pd]; visited {
 			return true
 		}
 	}
