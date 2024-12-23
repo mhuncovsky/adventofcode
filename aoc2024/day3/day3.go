@@ -86,7 +86,7 @@ func (m *Memory) readDigit(end byte) (bool, int) {
 	}
 
 	digit := make([]byte, 0)
-	for _ = range 3 {
+	for range 3 {
 		if m.data == nil || m.pos >= len(*m.data) || m.pos < 0 {
 			return false, 0
 		}
