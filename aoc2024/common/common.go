@@ -13,6 +13,7 @@ func LoadFileLines(path string) ([]string, error) {
 	if err != nil {
 		return lines, err
 	}
+	defer f.Close()
 
 	s := bufio.NewScanner(f)
 	s.Split(bufio.ScanLines)
@@ -23,4 +24,13 @@ func LoadFileLines(path string) ([]string, error) {
 	}
 
 	return lines, nil
+}
+
+func LoadFileText(path string) (string, error) {
+	bytes, err := os.ReadFile(path)
+	if err != nil {
+		return "", err
+	}
+
+	return string(bytes), nil
 }
