@@ -38,7 +38,6 @@ func solve1(lines []string) int {
 		}
 	}
 
-	antinodes := make([]vec2, 0)
 	antinodesM := make(map[vec2]struct{})
 	for _, v := range antenas {
 		comb := uniqueCombinations(v)
@@ -46,13 +45,12 @@ func solve1(lines []string) int {
 			a, b := c[0], c[1]
 			dx := a[0] - b[0]
 			dy := a[1] - b[1]
-			antinodes = append(antinodes, vec2{a[0] + dx, a[1] + dy}, vec2{b[0] - dx, b[1] - dy})
 			antinodesM[vec2{a[0] + dx, a[1] + dy}] = struct{}{}
 			antinodesM[vec2{b[0] - dx, b[1] - dy}] = struct{}{}
 		}
 	}
 	antinodesK := make(map[vec2]struct{})
-	for k, _ := range antinodesM {
+	for k := range antinodesM {
 		if k[0] >= 0 && k[0] < sx && k[1] >= 0 && k[1] < sy {
 			sum += 1
 			antinodesK[k] = struct{}{}
