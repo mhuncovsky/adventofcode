@@ -166,24 +166,25 @@ func TestZigZag(t *testing.T) {
 }
 
 func TestExtract(t *testing.T) {
-	lines := make([]string, 0)
-	lines = append(lines, ".................")
-	lines = append(lines, "........L........")
-	lines = append(lines, "........L........")
-	lines = append(lines, ".......LLLLL.....")
-	lines = append(lines, "....LLLLLLL......")
-	lines = append(lines, "...LLLLLLL.......")
-	lines = append(lines, "..LLLLLLLLLL.....")
-	lines = append(lines, "..LLLLLLLLLLLLLL.")
-	lines = append(lines, ".LLLLLLLLLLLLL...")
-	lines = append(lines, ".LLLLLLLLLLLLL...")
-	lines = append(lines, ".LLLLLLLLLLLLL...")
-	lines = append(lines, ".LLLLLLLLLLLLL...")
-	lines = append(lines, "....LLLLLL.......")
-	lines = append(lines, "....LLLLLL.......")
-	lines = append(lines, ".....LL.LLL......")
-	lines = append(lines, ".....L...........")
-	lines = append(lines, ".................")
+	lines := []string{
+		".................",
+		"........L........",
+		"........L........",
+		".......LLLLL.....",
+		"....LLLLLLL......",
+		"...LLLLLLL.......",
+		"..LLLLLLLLLL.....",
+		"..LLLLLLLLLLLLLL.",
+		".LLLLLLLLLLLLL...",
+		".LLLLLLLLLLLLL...",
+		".LLLLLLLLLLLLL...",
+		".LLLLLLLLLLLLL...",
+		"....LLLLLL.......",
+		"....LLLLLL.......",
+		".....LL.LLL......",
+		".....L...........",
+		".................",
+	}
 	expected := 40
 	sides := countSides(lines, V{8, 1})
 	if sides != expected {
@@ -197,25 +198,26 @@ func TestExtract(t *testing.T) {
 }
 
 func TestExtract2(t *testing.T) {
-	lines := make([]string, 0)
-	lines = append(lines, "............")
-	lines = append(lines, "...K...KKK..")
-	lines = append(lines, "...KK..KKKK.")
-	lines = append(lines, "..KKKK.KKKK.")
-	lines = append(lines, "..KKKKKKKKK.")
-	lines = append(lines, "..KKKKKKKKK.")
-	lines = append(lines, "..KKKKKKKKK.")
-	lines = append(lines, ".KKKKKKKKKK.")
-	lines = append(lines, ".KKKKKKKKKK.")
-	lines = append(lines, ".KKKKKKKKKK.")
-	lines = append(lines, ".KKKKKKKKKK.")
-	lines = append(lines, "..KKKKKKKKK.")
-	lines = append(lines, "..KKKKKKKKK.")
-	lines = append(lines, "..KKKK.K.K..")
-	lines = append(lines, "...KKK.K.K..")
-	lines = append(lines, "...KK.KK....")
-	lines = append(lines, "...K........")
-	lines = append(lines, "............")
+	lines := []string{
+		"............",
+		"...K...KKK..",
+		"...KK..KKKK.",
+		"..KKKK.KKKK.",
+		"..KKKKKKKKK.",
+		"..KKKKKKKKK.",
+		"..KKKKKKKKK.",
+		".KKKKKKKKKK.",
+		".KKKKKKKKKK.",
+		".KKKKKKKKKK.",
+		".KKKKKKKKKK.",
+		"..KKKKKKKKK.",
+		"..KKKKKKKKK.",
+		"..KKKK.K.K..",
+		"...KKK.K.K..",
+		"...KK.KK....",
+		"...K........",
+		"............",
+	}
 	expected := 38
 	sides := countSides(lines, V{3, 1})
 	if sides != expected {
